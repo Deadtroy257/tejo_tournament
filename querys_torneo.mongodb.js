@@ -1,5 +1,4 @@
 use("tejo_tournament");
-
 db.getCollection("players").find({age: {$gt: 40}});
 db.getCollection("players").find({age: {$lt: 30}});
 db.getCollection("players").find({
@@ -14,9 +13,11 @@ cursor.forEach((e) => {
 
 
 //Equipo ganador del torneo
+use("tejo_tournament");
 db.standing_table.find({ position: 1 });
 
 //Todos los encientros jugados por un equipo
+use("tejo_tournament");
 db.matches.find({
     $or: [
       { team1_id: "team001" },
@@ -25,6 +26,7 @@ db.matches.find({
   });
 
 //Obtener los detalles de un equipo (entrnador y jugadorres)
+use("tejo_tournament");
 db.teams.aggregate([
     {
       $match: { _id: "team001" }
@@ -48,6 +50,7 @@ db.teams.aggregate([
   ]);
 
   //Obtener los 3 equipos con mayor diferencia de puntos
+  use("tejo_tournament");
   db.standing_table.aggregate([
     {
       $project: {
@@ -63,10 +66,12 @@ db.teams.aggregate([
 
 
 //Actualizar
-db.players.updateOne({ name: "Juan Pérez" }, { $set: { age: 26 } });
+use("tejo_tournament");
+db.players.updateOne({ name: "Diego Castro" }, { $set: { age: 26 } });
 
 
 //Eliminar
-db.players.deleteOne({ name: "Juan Pérez" });
+use("tejo_tournament");
+db.players.deleteOne({ name: "Diego Castro" });
 
 
